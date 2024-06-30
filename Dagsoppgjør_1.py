@@ -17,7 +17,7 @@ def excel_date(date1):
     return float(delta.days) + (float(delta.seconds) / 86400)
 
 # Katalogen der filene ligger
-directory = '/Users/bredeespelid/Desktop/Dagsoppgjør/excel'
+directory = '/Users/'
 
 # Finn alle Excel-filer i katalogen
 excel_files = glob(os.path.join(directory, '*.xlsx'))
@@ -81,7 +81,7 @@ df.rename(columns=new_columns, inplace=True)
 df = df[~df['Avd'].isin([10, 90])]
 
 # Sti til den nye Excel-filen
-output_file_path = '/Users/bredeespelid/Desktop/Dagsoppgjør/modified_file.xlsx'
+output_file_path = '/Users/'
 
 # Lagre den nye DataFrame til en ny Excel-fil
 df.to_excel(output_file_path, index=False)
