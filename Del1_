@@ -42,7 +42,7 @@ for index, row in df.iterrows():
 df['Avd'] = df['Avd'].fillna(method='ffill')
 df['Avd'] = df['Avd'].fillna(0).astype(int)
 
-# Filtrer bort rader i kolonnen "Konto" basert på kriteriene
+# Funksjon for å filtrere bort rader basert på kriterier for "Konto"
 def filter_konto(konto):
     if pd.isna(konto) or konto == '' or konto == ' ':
         return False
@@ -52,6 +52,7 @@ def filter_konto(konto):
         return False
     return True
 
+# Filtrering av DataFrame basert på "Konto"-kolonnen
 df = df[df['Konto'].apply(filter_konto)]
 
 # Konverter celler under og til høyre for D1 til heltall der det er mulig
@@ -65,11 +66,12 @@ for col in df.columns[3:]:
         date_val = pd.to_datetime(col)
         new_columns[col] = excel_date(date_val)
     except ValueError:
-        pass  # Skip columns that cannot be converted
+        pass  # Hopp over kolonner som ikke kan konverteres
 
+# Oppdater kolonnenavnene i DataFrame
 df.rename(columns=new_columns, inplace=True)
 
-# Filtrer bort rader med nummer 10 og 11 i kolonnen "Avd"
+# Filtrer bort rader med nummer 10 og 90 i kolonnen "Avd"
 df = df[~df['Avd'].isin([10, 90])]
 
 # Sti til den nye Excel-filen
