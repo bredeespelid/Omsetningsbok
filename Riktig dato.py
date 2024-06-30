@@ -11,7 +11,7 @@ import re
 import datetime
 
 # Katalogen der filene ligger
-directory = '/Users/bredeespelid/Desktop/Dagsoppgjør/excel'
+directory = '/Users/excel'
 
 # Finn alle Excel-filer i katalogen
 excel_files = glob(os.path.join(directory, '*.xlsx'))
@@ -77,7 +77,7 @@ df.rename(columns=new_columns, inplace=True)
 df = df[~df['Avd'].isin([10, 90])]
 
 # Sti til den nye Excel-filen
-output_file_path = '/Users/bredeespelid/Desktop/Dagsoppgjør/modified_file.xlsx'
+output_file_path = '/Users/modified_file.xlsx'
 
 # Lagre DataFrame til en ny Excel-fil med formler
 with pd.ExcelWriter(output_file_path, engine='xlsxwriter') as writer:
@@ -90,5 +90,5 @@ with pd.ExcelWriter(output_file_path, engine='xlsxwriter') as writer:
         if isinstance(value, str) and re.match(r'^\d{4}/\d{2}/\d{2}$', value):
             worksheet.write_formula(0, col_num, f'=DATEVALUE("{value}")')
 
-print(f"To nye kolonner er lagt til, 'Avd' er fylt ut med tallverdier, rader er filtrert, kolonnenavnene er konvertert til DATEVALUE-formler, og den nye filen er lagret som {output_file_path}")
+print(f"Done")
 
